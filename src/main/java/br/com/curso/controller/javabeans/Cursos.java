@@ -1,12 +1,12 @@
-package br.com.model;
+package br.com.curso.controller.javabeans;
 
 public class Cursos {
 
 	private Integer id;
-	  private String nome;
-	  private String duracao;
+	private String nome;
+	private String duracao;
 	  
-	  public Cursos(Integer id, String nome, String duracao) {
+public Cursos(Integer id, String nome, String duracao) {
 	    this.id = id;
 	    this.nome = nome;
 	    this.duracao = duracao;
