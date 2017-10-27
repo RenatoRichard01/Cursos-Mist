@@ -59,7 +59,7 @@ public abstract class GenericDao<T, I extends Serializable> {
 		return listar;
 	}
 	@SuppressWarnings("unchecked")
-	public T listarPorId(Class<T> classe, Long pk) throws Exception {
+	public T listarPorId(Class<T> classe, Integer pk) throws Exception {
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();

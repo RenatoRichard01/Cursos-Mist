@@ -3,8 +3,10 @@ package br.com.curso.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,13 +17,22 @@ import br.com.dao.CursosDao;
 @RestController
 public class CursoResource {
  
+  CursosDao cDao = new CursosDao(); 
   
-  CursosDao cDao = new CursosDao();
+  @RequestMapping(value = "/adicionaCurso/{nome}/{duracao}", method = RequestMethod.POST)
+  //@ResponseStatus(value = HttpStatus.CREATED)
+  public ResponseEntity<List<Cursos>> salvar(@PathVariable("nome") String nome, @PathVariable("duracao") String duracao){
+ 	 Cursos curso = new Cursos();
+ 	 curso.setDuracao(duracao);
+ 	 curso.setNome(nome);
+ 	 cDao.adicionar(curso);
+ 	 return new ResponseEntity<List<Cursos>>(cDao.listar(Cursos.class), HttpStatus.OK);
+  }
+  
   @RequestMapping(value = "/listaCursos", method = RequestMethod.GET)
   public ResponseEntity<List<Cursos>> listar() {
     return new ResponseEntity<List<Cursos>>(cDao.listar(Cursos.class), HttpStatus.OK);
   }
-}
   
   /*
 @RequestMapping(value = "/cursos/{id}", method = RequestMethod.GET)
@@ -36,16 +47,16 @@ public ResponseEntity<Cursos> buscar(@PathVariable("id") Integer id) {
   
 }
 
-
+*/
 @RequestMapping(value = "/cursos/{id}", method = RequestMethod.DELETE)
-public ResponseEntity<?> deletar(@PathVariable("id") int id) {
-	
-  Cursos curso = cursos.remove(id);
+public ResponseEntity<?> deletar(@PathVariable("id") int id) throws Exception {
+	Cursos c = cDao.listarPorId(Cursos.class, id);
+    cDao.deletar(c);
  
-  if (curso == null) {
+  if (c == null) {
     return new ResponseEntity<Cursos>(HttpStatus.NOT_FOUND);
   }
  
   return new ResponseEntity<Cursos>(HttpStatus.NO_CONTENT);
 }
-*/
+}
