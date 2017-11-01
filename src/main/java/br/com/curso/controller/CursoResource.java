@@ -2,7 +2,6 @@ package br.com.curso.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,22 +19,24 @@ public class CursoResource {
 
 	CursosDao cDao = new CursosDao();
 
-	@RequestMapping(value = "/curso/adiciona/{nome}/{duracao}",name="adicionaCurso", method = RequestMethod.POST)
-	public ResponseEntity<List<Cursos>> salvar(@PathVariable("nome") String nome,
-			@PathVariable("duracao") String duracao) {
+	@RequestMapping(value = "/cursoAdiciona/{nome}/{duracao}", method = RequestMethod.GET)
+	public ResponseEntity<List<Cursos>> salvar(@PathVariable("nome")String nome,
+			@PathVariable("duracao")String duracao) {
 		Cursos curso = new Cursos();
-		curso.setDuracao(duracao);
 		curso.setNome(nome);
+		curso.setDuracao(duracao);
 		cDao.adicionar(curso);
 		return new ResponseEntity<List<Cursos>>(cDao.listar(Cursos.class), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/cursos/lista", method = RequestMethod.GET)
+	@RequestMapping(value = "/cursoLista", method = RequestMethod.GET)
 	public ResponseEntity<List<Cursos>> listar() {
 		return new ResponseEntity<List<Cursos>>(cDao.listar(Cursos.class), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/cursosPorId/{id}", method = RequestMethod.GET)
+	
+
+	@RequestMapping(value = "/cursoPorId/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Cursos> buscar(@PathVariable("id") Integer id) throws Exception {
 		Cursos curso = cDao.listarPorId(Cursos.class, id);
 		if (curso == null) {
@@ -44,11 +45,10 @@ public class CursoResource {
 		return new ResponseEntity<Cursos>(curso, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/cursos/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/cursoDeleta/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deletar(@PathVariable("id") int id) throws Exception {
 		Cursos c = cDao.listarPorId(Cursos.class, id);
 		cDao.deletar(c);
-
 		if (c == null) {
 			return new ResponseEntity<Cursos>(HttpStatus.NOT_FOUND);
 		}

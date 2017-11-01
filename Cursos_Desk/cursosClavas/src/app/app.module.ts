@@ -6,11 +6,13 @@ import {HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { FormCursoComponent } from './form-curso/form-curso.component';
+import { CursosGridComponent } from './cursos-grid/cursos-grid.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormCursoComponent
+    FormCursoComponent,
+    CursosGridComponent
   ],
   imports: [
     BrowserModule,

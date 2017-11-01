@@ -1,5 +1,5 @@
 
-<form class="form-horizontal" [formGroup]="formulario" action="adicionaCurso" method="POST">
+<form class="form-horizontal" [formGroup]="formulario">
   <div class="form-group">
     <div class="col-sm-9">
       <label for="nome" class="control-label">Descrição</label>
@@ -7,7 +7,8 @@
 
     <div class="col-sm-4">
       <input type="text" class="form-control"
-        id="exampleInputNome" [(ngModel)]="nome" placeholder="Descrição" >
+        id="nome" [(ngModel)]="nome" name="nome"
+        placeholder="Descrição" >
     </div>
   </div>
   <div class="form-group">
@@ -17,36 +18,35 @@
 
     <div class="col-sm-4">
       <input type="text" class="form-control"
-        id="exampleInputDuracao" [(ngModel)]= "duracao" placeholder="duracao" >
+       [(ngModel)]= "duracao" name="duracao"
+        placeholder="duracao" >
     </div>
   </div>
 
   <button type="submit" class="btn btn-primary"
   (click)="adicionaCurso()">Submit</button>
-  <button class="btn" >Cancelar</button><!-- (click)="resetar()" -->
+  <button class="btn" (click)="resetaForm()">Cancelar</button>
 
   </form>
 
   <table width="600px" class="table table-bordered">
-    <tr>
-      <td class="active">Id</td>
-      <td class="success">Descrição</td>
-      <td class="success">Horas</td>
-      <td class="danger">Excluir</td>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Curso</th>
+        <th>Duração</th>
+        <th>Modificar</th>
+        <th>Remover</th>
+      </tr>
+    </thead>
+
+    <tr *ngFor="let curso of cursos">
+      <td >{{ curso.id }}</td>
+      <td><input type="text" class="input" value="{{ curso.nome }}"></td>
+      <td> <input type= "text" class = "input" value="{{ curso.duracao }}"></td>
+      <td><button type="button" class="btn btn-danger"
+        (click)="excluirCurso(curso.id)"> Excluir</button></td>
       <td class="active">Alterar</td>
     </tr>
 
-    <!--c:forEach- items="${}" var="cursos">
-      <form action="alterarCurso" method="post">
-        <tr>
-          <td><input type="text"  name="id" /></td>
-          <td><input type="text"  name="nome" /></td>
-          <td><input type="text" name="id" /></td>
-          <td><a href="#" class="btn btn-danger">Remover</a></td>
-          <td><input type="submit" value="Alterar" class="btn btn-warning"/></td>
-        </tr>
-      </form>
-    </c:forEach-->
   </table>
-
-
