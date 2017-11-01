@@ -1,25 +1,25 @@
 
 <form class="form-horizontal" [formGroup]="formulario">
   <div class="form-group">
-    <div class="col-sm-9">
-      <label for="nome" class="control-label">Descrição</label>
+    <div class="col-sm-5">
+      <label for="nomeCurso" class="control-label">Descrição</label>
     </div>
 
     <div class="col-sm-4">
       <input type="text" class="form-control"
-        id="nome" [(ngModel)]="nome" name="nome"
-        placeholder="Descrição" >
+        id="nomeCurso" placeholder="Descrição"
+        [(ngModel)]="nome" name="nome" />
     </div>
   </div>
   <div class="form-group">
-    <div class="col-sm-9">
-      <label for="duracao" class="control-label">Duração</label>
+    <div class="col-sm-5">
+      <label for="tempoDuracao" class="control-label">Duração</label>
     </div>
 
     <div class="col-sm-4">
-      <input type="text" class="form-control"
+      <input type="text" class="form-control" id = "tempoDuracao"
        [(ngModel)]= "duracao" name="duracao"
-        placeholder="duracao" >
+        placeholder="duracao" />
     </div>
   </div>
 
@@ -28,6 +28,16 @@
   <button class="btn" (click)="resetaForm()">Cancelar</button>
 
   </form>
+
+  <form class="navbar-form " >
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Curso"
+    [(ngModel)]="nomeCurso" name="nomeCurso">
+  </div>
+  <button type="submit" class="btn btn-4"
+  (click)="pesquisarCurso()">Buscar</button>
+</form>
+<br><br>
 
   <table width="600px" class="table table-bordered">
     <thead>
@@ -48,5 +58,4 @@
         (click)="excluirCurso(curso.id)"> Excluir</button></td>
       <td class="active">Alterar</td>
     </tr>
-
   </table>

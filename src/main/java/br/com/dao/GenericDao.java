@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -71,6 +72,23 @@ public abstract class GenericDao<T, I extends Serializable> {
 			throw e;
 		}
 	}
+	@SuppressWarnings("unchecked")
+	public List<T> buscarPorNome(String classe, String nome) throws Exception {
+		Transaction transaction = null;
+		List<T> listagem = null;
+		try {
+			transaction = session.beginTransaction();
+			Query consulta = session.getNamedQuery(classe + ".buscarPorNome");
+			consulta.setString("nome", nome);
+			listagem = consulta.list();
+			session.flush();
+			transaction.commit();
+			return listagem;
+		} catch (RuntimeException e) {
+			throw e;
+		}
+	}
+	
 	
 	
 }

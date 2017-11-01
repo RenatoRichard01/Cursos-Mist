@@ -9,9 +9,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class FormCursoComponent implements OnInit {
   id: number;
-  nome: string;
+
+  descricao: string;
   duracao: string;
-  cursos: any = { };
+
+  cursos: any = {};
+
+  nomeCurso: string;
 
   formulario: FormGroup;
 
@@ -28,14 +32,21 @@ export class FormCursoComponent implements OnInit {
   }
 
   adicionaCurso(): void {
-    this.http.get('http://localhost:8080/cursoAdiciona/' + this.nome + '/' + this.duracao).subscribe( data => {
-      console.log(data);
+    this.http.get('http://localhost:8080/cursoAdiciona/' + this.descricao + '/' + this.duracao).subscribe( data => {
+      this.cursos = data;
     });
   }
   excluirCurso(id) {
     this.http.delete('http://localhost:8080/cursoDeleta/' + id).subscribe( data => {
       this.cursos = data;
     });
+  }
+  pesquisarCurso() {
+    this.http.get('http://localhost:8080/pesquisarNome/' + this.nomeCurso).subscribe(
+      data => {
+        this.cursos = data;
+      }
+    );
   }
 
 }

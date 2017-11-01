@@ -19,7 +19,6 @@ import { CursosGridComponent } from './cursos-grid/cursos-grid.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
-
   ],
   providers: [],
   bootstrap: [AppComponent],
