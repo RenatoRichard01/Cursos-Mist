@@ -44,6 +44,19 @@ public abstract class GenericDao<T, I extends Serializable> {
 		}
 	}
 	
+	public void alterar(T entity) {
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			session.update(entity);
+			transaction.commit();
+		} catch (RuntimeException e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		}
+	}
+	
 	
 	@SuppressWarnings("unchecked")
 	public List<T> listar(Class<T> classe) {

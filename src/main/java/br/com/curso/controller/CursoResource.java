@@ -43,9 +43,19 @@ public class CursoResource {
 		if (c == null) {
 			return new ResponseEntity<Cursos>(HttpStatus.NOT_FOUND);
 		}
-
-		return new ResponseEntity<Cursos>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<List<Cursos>>(cDao.listar(Cursos.class), HttpStatus.NO_CONTENT);
 	}
+	
+	@RequestMapping(value = "/alteraCurso/{id}/{nome}/{duracao}", method = RequestMethod.GET)
+	public ResponseEntity<List<Cursos>> alterar(@PathVariable("id") Integer id, @PathVariable("nome") String nome, @PathVariable("duracao") String duracao) throws Exception {
+		Cursos curso = cDao.listarPorId(Cursos.class, id);
+		curso.setNome(nome);
+		curso.setDuracao(duracao);
+		cDao.alterar(curso);
+		//return new ResponseEntity<List<Cursos>>(cDao.listar(Cursos.class), HttpStatus.OK);
+		return new ResponseEntity<List<Cursos>>(new ArrayList<Cursos>(cDao.listar(Cursos.class)), HttpStatus.OK);
+	}
+	
 	@RequestMapping(value = "/pesquisarNome/{nome}", method = RequestMethod.GET)
 	public ResponseEntity<List<Cursos>> buscar(@PathVariable("nome") String nome) throws Exception {
 		List<Cursos> listagem = cDao.buscarPorNome("Cursos", nome);
