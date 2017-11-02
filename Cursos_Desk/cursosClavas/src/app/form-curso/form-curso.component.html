@@ -8,34 +8,37 @@
     <div class="col-sm-4">
       <input type="text" class="form-control"
         id="nomeCurso" placeholder="Descrição"
-        [(ngModel)]="nome" name="nome" />
+        [(ngModel)]="descricao" name="Desenvolvimento C#" required />
     </div>
   </div>
   <div class="form-group">
     <div class="col-sm-5">
-      <label for="tempoDuracao" class="control-label">Duração</label>
+      <label for="tempoDuracao" class="control-label" >Duração</label>
     </div>
 
     <div class="col-sm-4">
       <input type="text" class="form-control" id = "tempoDuracao"
-       [(ngModel)]= "duracao" name="duracao"
-        placeholder="duracao" />
+       [(ngModel)]= "duracao" name="carga horária"
+        placeholder="duracao"  required/>
     </div>
   </div>
 
   <button type="submit" class="btn btn-primary"
   (click)="adicionaCurso()">Submit</button>
-  <button class="btn" (click)="resetaForm()">Cancelar</button>
+  <button class="btn" (click)="resetaForm()" >Cancelar</button>
 
   </form>
+<br><br>
 
   <form class="navbar-form " >
-  <div class="form-group">
-    <input type="text" class="form-control" placeholder="Curso"
+    
+  <div class="col-sm-4">
+    <input type="text" class="form-control" placeholder="Pesquisar por curso"
     [(ngModel)]="nomeCurso" name="nomeCurso">
+    <button type="submit" class="btn btn-4"
+    (click)="pesquisarCurso()">Buscar</button>
   </div>
-  <button type="submit" class="btn btn-4"
-  (click)="pesquisarCurso()">Buscar</button>
+  
 </form>
 <br><br>
 
@@ -45,17 +48,27 @@
         <th>Id</th>
         <th>Curso</th>
         <th>Duração</th>
-        <th>Modificar</th>
+        <th>Alterar</th>
         <th>Remover</th>
       </tr>
     </thead>
-
-    <tr *ngFor="let curso of cursos">
-      <td >{{ curso.id }}</td>
-      <td><input type="text" class="input" value="{{ curso.nome }}"></td>
-      <td> <input type= "text" class = "input" value="{{ curso.duracao }}"></td>
+   <tbody>
+    <tr *ngFor="let curso of listaDeCursos">
+      <td>{{ curso.id }}</td>
+      <td>
+        <div class="col-sm-7">
+          <input type="text" class="input" class="form-control" value="{{ curso.nome }}" name="nomeInp" #nomeInput>
+        </div>
+      </td>
+      <td> 
+        <div class="col-6">
+            <input type= "text" class = "input" class="form-control" value="{{ curso.duracao }}" name = "duracaoInp" #duracaoInput>
+        </div> 
+      </td>
       <td><button type="button" class="btn btn-danger"
-        (click)="excluirCurso(curso.id)"> Excluir</button></td>
-      <td class="active">Alterar</td>
+        (click)="excluirCurso(curso.id)"> Excluir</button></td> 
+      <td> <button type="button" class ="btn btn-primary"
+        (click)="modificarCursos(curso.id, nomeInput.value, duracaoInput.value)">Alterar</button></td>
     </tr>
+    </tbody>
   </table>
