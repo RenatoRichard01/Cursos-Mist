@@ -1,4 +1,3 @@
-
 <form class="form-horizontal" [formGroup]="formulario">
   <div class="form-group">
     <div class="col-sm-5">
@@ -8,7 +7,7 @@
     <div class="col-sm-4">
       <input type="text" class="form-control"
         id="nomeCurso" placeholder="Descrição"
-        [(ngModel)]="descricao" name="Desenvolvimento C#" required />
+        [(ngModel)]="descricao" name="descricao" />
     </div>
   </div>
   <div class="form-group">
@@ -17,58 +16,58 @@
     </div>
 
     <div class="col-sm-4">
-      <input type="text" class="form-control" id = "tempoDuracao"
-       [(ngModel)]= "duracao" name="carga horária"
-        placeholder="duracao"  required/>
+      <input type="text" class="form-control" id = "duracao"
+       [(ngModel)]= "duracao" name="duracao"
+        placeholder="Carga horária" />
     </div>
   </div>
 
   <button type="submit" class="btn btn-primary"
-  (click)="adicionaCurso()">Submit</button>
+  (click)="adicionaCurso()">Salvar</button>
   <button class="btn" (click)="resetaForm()" >Cancelar</button>
 
   </form>
 <br><br>
 
   <form class="navbar-form " >
-    
+
   <div class="col-sm-4">
     <input type="text" class="form-control" placeholder="Pesquisar por curso"
     [(ngModel)]="nomeCurso" name="nomeCurso">
     <button type="submit" class="btn btn-4"
     (click)="pesquisarCurso()">Buscar</button>
   </div>
-  
+
 </form>
 <br><br>
-
-  <table width="600px" class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Curso</th>
-        <th>Duração</th>
-        <th>Alterar</th>
-        <th>Remover</th>
-      </tr>
-    </thead>
-   <tbody>
-    <tr *ngFor="let curso of listaDeCursos">
-      <td>{{ curso.id }}</td>
-      <td>
-        <div class="col-sm-7">
-          <input type="text" class="input" class="form-control" value="{{ curso.nome }}" name="nomeInp" #nomeInput>
-        </div>
-      </td>
-      <td> 
-        <div class="col-6">
-            <input type= "text" class = "input" class="form-control" value="{{ curso.duracao }}" name = "duracaoInp" #duracaoInput>
-        </div> 
-      </td>
-      <td><button type="button" class="btn btn-danger"
-        (click)="excluirCurso(curso.id)"> Excluir</button></td> 
-      <td> <button type="button" class ="btn btn-primary"
-        (click)="modificarCursos(curso.id, nomeInput.value, duracaoInput.value)">Alterar</button></td>
+<table width="600px" class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Curso</th>
+      <th>Duração</th>
+      <th>Alterar</th>
+      <th>Remover</th>
     </tr>
-    </tbody>
-  </table>
+  </thead>
+ <tbody>
+  <tr *ngFor="let curso of listaDeCursos">
+    <td>{{ curso.id }}</td>
+    <td>
+      <div class="col-sm-7">
+        <input type="text" class="input" class="form-control" value="{{ curso.nome }}" name="nomeInput" #nomeInput>
+      </div>
+    </td>
+    <td>
+      <div class="col-6">
+          <input type= "text" class = "input" class="form-control" value="{{ curso.duracao }}" name = "duracaoInput" #duracaoInput>
+      </div>
+    </td>
+    <td><button type="button" class="btn btn-danger"
+      (click)="excluirCurso(curso.id)"> Excluir</button></td>
+    <td> <button type="button" class ="btn btn-primary"
+      (click)="modificarCursos(curso.id, nomeInput.value, duracaoInput.value)">Alterar</button></td>
+  </tr>
+  </tbody>
+</table>
+

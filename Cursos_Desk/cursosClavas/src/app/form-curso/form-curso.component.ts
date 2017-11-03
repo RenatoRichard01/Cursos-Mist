@@ -8,10 +8,11 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./form-curso.component.css']
 })
 export class FormCursoComponent implements OnInit {
+  curso: string;
   id: number;
 
   descricao: string;
-  duracao: string
+  duracao: string;
   listaDeCursos: any = {};
   nomeCurso: string;
 
@@ -31,9 +32,23 @@ export class FormCursoComponent implements OnInit {
   }
 
   adicionaCurso(): void {
-    this.http.get('http://localhost:8080/cursoAdiciona/' + this.descricao + '/' + this.duracao).subscribe( data => {
-      this.listaDeCursos = data;
-    });
+    const cursos = {
+      descricao: this.curso,
+      duracao: this.duracao
+    };
+    if ((this.curso !== undefined) && (this.duracao !== undefined)) {
+      this.http.post('http//localhost:8080/cursoAdiciona/', cursos).subscribe(
+       data => {
+         this.listaDeCursos = data;
+       }
+      );
+      this.curso = '';
+      this.duracao = '';
+    } else {
+      this.curso = '';
+      this.duracao = '';
+      alert('Existem campos vazios!');
+    }
   }
 
   excluirCurso(id) {
@@ -42,12 +57,27 @@ export class FormCursoComponent implements OnInit {
     });
   }
 
-  modificarCursos(id, nomeInput, duracaoInput){
-    this.http.get('http://localhost:8080/alteraCurso/'
-    + id + '/' + nomeInput + '/' + duracaoInput).subscribe(
-      data => {
+  modificarCursos(id, nomeInput, duracaoInput) {
+    if ((id !== undefined) && (nomeInput !== '') && (duracaoInput !== '')) {
+      const curso = {
+        id: id,
+        nome: nomeInput,
+        duracao: duracaoInput
+      };
+      this.http.put('http://localhost:8080/alteraCurso', curso)
+      .subscribe(
+          data => {
+            this.listaDeCursos = data;
+          }
+        );
+        alert('id: ' +  id + 'alterado com sucesso');
+    } else {
+      this.http.get('http://localhost:8080/cursoLista').subscribe
+      (data => {
         this.listaDeCursos = data;
       });
+      alert(' ERRO ao alterar campos, verifique se não estão vazios');
+    }
   }
 
   pesquisarCurso() {
@@ -57,9 +87,6 @@ export class FormCursoComponent implements OnInit {
       }
     );
   }
-  validTouched(){
-    
+  validTouched() {
   }
-
-
 }
