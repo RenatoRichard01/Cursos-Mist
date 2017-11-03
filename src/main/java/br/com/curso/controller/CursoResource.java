@@ -22,7 +22,7 @@ public class CursoResource {
 
 	CursosDao cDao = new CursosDao();
 
-	@RequestMapping(value = "/cursoAdiciona/", method = RequestMethod.POST)
+	@RequestMapping(value = "/novoCurso", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<List<Cursos>> salvar (@RequestBody Cursos curso) {
 		cDao.adicionar(curso);

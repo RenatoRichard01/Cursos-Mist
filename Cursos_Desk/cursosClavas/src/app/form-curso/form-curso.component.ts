@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./form-curso.component.css']
 })
 export class FormCursoComponent implements OnInit {
-  curso: string;
+
   id: number;
 
   descricao: string;
@@ -32,20 +32,18 @@ export class FormCursoComponent implements OnInit {
   }
 
   adicionaCurso(): void {
-    const cursos = {
-      descricao: this.curso,
+    const cursoAdd = {
+      descricao: this.descricao,
       duracao: this.duracao
     };
-    if ((this.curso !== undefined) && (this.duracao !== undefined)) {
-      this.http.post('http//localhost:8080/cursoAdiciona/', cursos).subscribe(
+    if ((this.descricao !== undefined) && (this.duracao !== undefined)) {
+      this.http.post('http://localhost:8080/novoCurso', cursoAdd).subscribe(
        data => {
          this.listaDeCursos = data;
        }
       );
-      this.curso = '';
-      this.duracao = '';
     } else {
-      this.curso = '';
+      this.descricao = '';
       this.duracao = '';
       alert('Existem campos vazios!');
     }
@@ -89,4 +87,4 @@ export class FormCursoComponent implements OnInit {
   }
   validTouched() {
   }
-}
+ }

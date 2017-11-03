@@ -21,9 +21,6 @@ public abstract class GenericDao<T, I extends Serializable> {
 			transaction.commit();
 			return entity;
 		} catch (Exception e) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			e.printStackTrace();
 		}
 		return null;
