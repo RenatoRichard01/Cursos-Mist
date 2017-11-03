@@ -7,8 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.curso.controller.javabeans.Cursos;
@@ -20,12 +22,9 @@ public class CursoResource {
 
 	CursosDao cDao = new CursosDao();
 
-	@RequestMapping(value = "/cursoAdiciona/{nome}/{duracao}", method = RequestMethod.GET)
-	public ResponseEntity<List<Cursos>> salvar(@PathVariable("nome")String nome,
-			@PathVariable("duracao")String duracao) {
-		Cursos curso = new Cursos();
-		curso.setNome(nome);
-		curso.setDuracao(duracao);
+	@RequestMapping(value = "/cursoAdiciona/", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<List<Cursos>> salvar (@RequestBody Cursos curso) {
 		cDao.adicionar(curso);
 		return new ResponseEntity<List<Cursos>>(cDao.listar(Cursos.class), HttpStatus.OK);
 	}
@@ -46,16 +45,17 @@ public class CursoResource {
 		return new ResponseEntity<List<Cursos>>(cDao.listar(Cursos.class), HttpStatus.NO_CONTENT);
 	}
 	
-	@RequestMapping(value = "/alteraCurso/{id}/{nome}/{duracao}", method = RequestMethod.GET)
-	public ResponseEntity<List<Cursos>> alterar(@PathVariable("id") Integer id, @PathVariable("nome") String nome, @PathVariable("duracao") String duracao) throws Exception {
-		Cursos curso = cDao.listarPorId(Cursos.class, id);
-		curso.setNome(nome);
-		curso.setDuracao(duracao);
-		cDao.alterar(curso);
-		//return new ResponseEntity<List<Cursos>>(cDao.listar(Cursos.class), HttpStatus.OK);
-		return new ResponseEntity<List<Cursos>>(new ArrayList<Cursos>(cDao.listar(Cursos.class)), HttpStatus.OK);
-	}
 	
+	@RequestMapping(value = "/alteraCurso", method = RequestMethod.PUT)
+	@ResponseBody
+	public ResponseEntity<List<Cursos>> alterar(@RequestBody Cursos curso) throws Exception {
+		Cursos cursoUp = cDao.listarPorId(Cursos.class, curso.getId());
+		cursoUp.setNome(curso.getNome());
+		cursoUp.setDuracao(curso.getDuracao());
+		cDao.alterar(cursoUp);
+		return new ResponseEntity<List<Cursos>>(cDao.listar(Cursos.class), HttpStatus.OK);
+	}
+
 	@RequestMapping(value = "/pesquisarNome/{nome}", method = RequestMethod.GET)
 	public ResponseEntity<List<Cursos>> buscar(@PathVariable("nome") String nome) throws Exception {
 		List<Cursos> listagem = cDao.buscarPorNome("Cursos", nome);
