@@ -6,11 +6,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
- listaDeCursos: any = {};
+export class AppComponent  {
 
-    constructor(private http: HttpClient) { }
-
+    constructor() { }
+/*
     ngOnInit(): void {
       this.http.get
       ('http://localhost:8080//cursoLista')
@@ -20,8 +19,7 @@ export class AppComponent implements OnInit {
         }
       );
     }
-    onAtualizarLista(evento) {
-      this.listaDeCursos = evento;
-    }
+    */
+
 }
 

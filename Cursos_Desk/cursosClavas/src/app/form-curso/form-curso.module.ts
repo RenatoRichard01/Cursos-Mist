@@ -1,10 +1,12 @@
+import { FormControlName } from '@angular/forms/src/directives';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/components/dialog/dialog';
-import {PanelModule, GrowlModule,  ButtonModule, InputTextModule} from 'primeng/primeng';
+import { PanelModule, GrowlModule, ButtonModule, InputTextModule, CodeHighlighterModule } from 'primeng/primeng';
 import { FormCursoComponent } from './form-curso.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {SplitButtonModule} from 'primeng/primeng';
 
 @NgModule({
   imports: [
@@ -13,8 +15,10 @@ import { CommonModule } from '@angular/common';
     ButtonModule,
     FormsModule,
     InputTextModule,
-    FormsModule,
-    HttpClientModule
+    PanelModule,
+    HttpClientModule,
+    GrowlModule,
+    CodeHighlighterModule
   ],
   declarations: [
     FormCursoComponent

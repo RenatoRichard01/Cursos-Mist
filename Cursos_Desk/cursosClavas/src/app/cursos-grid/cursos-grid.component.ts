@@ -9,15 +9,16 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CursosGridComponent implements OnInit {
 
-  @Input('listaDeCursos') listaDeCursos: any = {};
 
-  constructor(private http: HttpClient) { }
+@Input('listCurso') listCurso: any = {};
 
-  ngOnInit() {
-  }
+constructor(private http: HttpClient) { }
+ngOnInit() {
+}
+
   excluirCurso(id) {
     this.http.delete('http://localhost:8080/cursoDeleta/' + id).subscribe( data => {
-      this.listaDeCursos = data;
+      this.listCurso = data;
     });
   }
 
@@ -31,17 +32,20 @@ export class CursosGridComponent implements OnInit {
       this.http.put('http://localhost:8080/alteraCurso', curso)
       .subscribe(
           data => {
-            this.listaDeCursos = data;
+            this.listCurso = data;
           }
         );
         alert('id: ' +  id + 'alterado com sucesso');
     } else {
       this.http.get('http://localhost:8080/cursoLista').subscribe
       (data => {
-        this.listaDeCursos = data;
+        this.listCurso = data;
       });
       alert(' ERRO ao alterar campos, verifique se não estão vazios');
     }
+  }
+  listaAtualizada(clavasEvent) {
+    this.listCurso = clavasEvent;
   }
 
 }

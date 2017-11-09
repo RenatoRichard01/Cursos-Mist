@@ -1,29 +1,33 @@
+import { PesquisaModule } from './pesquisa/pesquisa.module';
+import { FormCursoModule } from './form-curso/form-curso.module';
+import { CursosGridComponent } from './cursos-grid/cursos-grid.component';
+import { FormCursoComponent } from './form-curso/form-curso.component';
 import { PesquisaComponent } from './pesquisa/pesquisa.component';
-
+import { DialogModule } from 'primeng/components/dialog/dialog';
+import { ButtonModule } from 'primeng/components/button/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
-
 import { AppComponent } from './app.component';
-import { FormCursoComponent } from './form-curso/form-curso.component';
-import { CursosGridComponent } from './cursos-grid/cursos-grid.component';
-import { FormCursoModule } from './form-curso/form-curso.module';
-import { CommonModule } from '@angular/common';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormCursoComponent,
-    CursosGridComponent,
-    PesquisaComponent
+    CursosGridComponent
   ],
   imports: [
-    CommonModule,
+    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormCursoModule
+    FormCursoModule,
+    PesquisaModule,
+    BrowserAnimationsModule,
+    DialogModule,
+    ButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent],
