@@ -28,10 +28,17 @@
   </tr>
   </tbody>
 </table>
-<p-dataTable [editable]="true">
-  <p-column field="nome" header="nome" [editable]="true"></p-column>
-  <p-column field="duracao" header="duracao" [editable]="true"></p-column>
-</p-dataTable-->
+-->
+<li *ngFor="let curso of listCurso">
+  {{l.nome}}
+</li>
 
-
+<!--div class="ui-g">
+  <div class="ui-g-12">
+    <p-dataTable >
+      <p-column field="nome"></p-column>
+      <p-column field="duracao"></p-column>
+    </p-dataTable>
+  </div>
+</div-->
 

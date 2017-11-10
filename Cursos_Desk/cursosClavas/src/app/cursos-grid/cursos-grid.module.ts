@@ -1,11 +1,26 @@
+import { ButtonModule } from 'primeng/components/button/button';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CursosGridComponent } from './cursos-grid.component';
+import {DataTableModule, SharedModule} from 'primeng/primeng';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    DataTableModule,
+    SharedModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    CommonModule,
+    ButtonModule
+
   ],
-  declarations: [CursosGridComponent]
+  declarations: [
+    CursosGridComponent
+  ]
+
+
 })
 export class CursosGridModule { }

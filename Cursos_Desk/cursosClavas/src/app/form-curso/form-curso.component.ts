@@ -17,7 +17,7 @@ export class FormCursoComponent implements OnInit {
   @Output() clavasEvent = new EventEmitter();
   nome: string;
   duracao: string;
-  nomeCurso: string;
+
 
   constructor(private http: HttpClient,
   private vl: FormBuilder) { }
@@ -32,13 +32,13 @@ export class FormCursoComponent implements OnInit {
     this.formCursos.reset();
   }
 
-  adicionaCurso(): void {
+  adicionaCurso(nome: string, duracao: string): void {
     const cursoAdd = {
-    nomeC: this.nome,
-    duracaoC: this.duracao
+    nome: this.nome,
+    duracao: this.duracao
     };
     if ((this.nome !== undefined) && (this.duracao !== undefined)) {
-      this.http.post('http://localhost:8080/novoCurso', cursoAdd).subscribe(
+      this.http.post('http://localhost:8080/', cursoAdd).subscribe(
        data => {
         this.clavasEvent.emit(data);
 

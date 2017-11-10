@@ -10,7 +10,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CursosGridComponent implements OnInit {
 
 
-//@Input('listCurso') listCurso: any = {};
+ @Input('listCurso') listCurso: any = {};
 
 constructor() { }
 ngOnInit() {

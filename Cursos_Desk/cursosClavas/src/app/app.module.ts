@@ -1,3 +1,4 @@
+import { CursosGridModule } from './cursos-grid/cursos-grid.module';
 import { PesquisaModule } from './pesquisa/pesquisa.module';
 import { FormCursoModule } from './form-curso/form-curso.module';
 import { CursosGridComponent } from './cursos-grid/cursos-grid.component';
@@ -16,8 +17,7 @@ import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    CursosGridComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +28,8 @@ import { AppComponent } from './app.component';
     PesquisaModule,
     BrowserAnimationsModule,
     DialogModule,
-    ButtonModule
+    CursosGridModule
+
   ],
   providers: [],
   bootstrap: [AppComponent],
