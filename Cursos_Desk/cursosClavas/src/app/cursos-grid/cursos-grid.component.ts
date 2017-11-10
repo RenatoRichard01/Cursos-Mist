@@ -10,23 +10,23 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CursosGridComponent implements OnInit {
 
 
-@Input('listCurso') listCurso: any = {};
+//@Input('listCurso') listCurso: any = {};
 
-constructor(private http: HttpClient) { }
+constructor() { }
 ngOnInit() {
 }
 
-  excluirCurso(id) {
-    this.http.delete('http://localhost:8080/cursoDeleta/' + id).subscribe( data => {
-      this.listCurso = data;
-    });
-  }
+//  excluirCurso(id) {
+//    this.http.delete('http://localhost:8080/cursoDeleta/' + id).subscribe( data => {
+//      this.listCurso = data;
+//   });
+//  }
 
-  modificarCursos(id, nomeInput, duracaoInput) {
+/*  modificarCursos(id, nomeInput, duracaoInput) {
     if ((id !== undefined) && (nomeInput !== '') && (duracaoInput !== '')) {
       const curso = {
         id: id,
-        nome: nomeInput,
+//        nome: nomeInput,
         duracao: duracaoInput
       };
       this.http.put('http://localhost:8080/alteraCurso', curso)
@@ -47,5 +47,6 @@ ngOnInit() {
   listaAtualizada(clavasEvent) {
     this.listCurso = clavasEvent;
   }
+*/
 
 }

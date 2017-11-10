@@ -27,6 +27,11 @@
       (click)="modificarCursos(curso.id, nomeInput.value, duracaoInput.value)">Alterar</button></td>
   </tr>
   </tbody>
-</table-->
+</table>
+<p-dataTable [editable]="true">
+  <p-column field="nome" header="nome" [editable]="true"></p-column>
+  <p-column field="duracao" header="duracao" [editable]="true"></p-column>
+</p-dataTable-->
+
 
 

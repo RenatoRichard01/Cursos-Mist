@@ -37,7 +37,9 @@
                     Descrição:
                 </div>
                 <div class="ui-grid-col-5">
-                    <input pInputText type="text" formControlName="nome" placeholder="Java basic"/>
+                    <input pInputText type="text" formControlName="nome"
+                    placeholder="Java basic"
+                     pTooltip="Descrição do curso" placeholder="Java basic"/>
                 </div>
             </div>
             <div class="ui-grid-row">
@@ -45,15 +47,25 @@
                     Duração:
                 </div>
                 <div class="ui-grid-col-5">
-                    <input pInputText type="text" formControlName="duracao" placeholder="45Hrs"/>
+                    <input pInputText type="text" formControlName = "duracao"
+                     placeholder="45Hrs"
+                    pTooltip="Duração de curso"/>
                 </div>
             </div>
             <div class="ui-grid-row">
               <div class="ui-grid-col-2">
-                  <button pButton type="submit" label="Salvar" [disabled]="!formCursos.valid"></button>
+                  <button pButton type="submit" label="Salvar" [disabled]="!formCursos.valid"
+                  (click)="adicionaCurso()" ></button>
               </div>
-          </div>
+              <div class="ui-grid-col-2">
+                  <button pButton type="submit" label="cancelar" [disabled]="!formCursos.valid"
+                  (click)="resetaForm()"></button>
+              </div>
+           </div>
 
+
+
+<!-- https://www.primefaces.org/primeng/#/validation -->
 
         </div>
     </p-panel>

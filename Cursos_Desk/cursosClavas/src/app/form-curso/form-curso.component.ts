@@ -1,8 +1,9 @@
-import {Validator} from 'codelyzer';
-import {Message} from '@angular/compiler/i18n';
+import { Diagnostic } from '@angular/compiler-cli/ngtools2';
+
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validator } from '@angular/forms';
+import {Validators, FormControl, FormGroup, FormBuilder} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Message } from 'primeng/components/common/api';
 
 @Component({
   selector: 'form-curso',
@@ -11,34 +12,30 @@ import { HttpClient } from '@angular/common/http';
 })
 export class FormCursoComponent implements OnInit {
   msgs: Message[] = [];
-
-  submitted: boolean;
   formCursos: FormGroup;
-  //@Output() clavasEvent = new EventEmitter();
+  submitted: boolean;
+  @Output() clavasEvent = new EventEmitter();
   nome: string;
   duracao: string;
-  //nomeCurso: string;
-
-  formulario: FormGroup;
+  nomeCurso: string;
 
   constructor(private http: HttpClient,
   private vl: FormBuilder) { }
-  ngOnInit(
+  ngOnInit() {
     this.formCursos = this.vl.group({
-      'nome': new FormControl('', Validator.required),
-      'duracao': new FormControl('', Validator.required)
+      nome: new FormControl('', Validators.required),
+      duracao: new FormControl('', Validators.required)
     });
-  ) {
   }
 
   resetaForm() {
-    this.formulario.reset();
+    this.formCursos.reset();
   }
-/*
+
   adicionaCurso(): void {
     const cursoAdd = {
-     nome: this.nome,
-      duracao: this.duracao
+    nomeC: this.nome,
+    duracaoC: this.duracao
     };
     if ((this.nome !== undefined) && (this.duracao !== undefined)) {
       this.http.post('http://localhost:8080/novoCurso', cursoAdd).subscribe(
@@ -47,18 +44,15 @@ export class FormCursoComponent implements OnInit {
 
        }
       );
-      alert('curso: ' + this.nome + 'Adicionado com sucesso');
       this.nome = '';
       this.duracao = '';
-    } else {
-      this.nome = '';
-      this.duracao = '';
-      alert('Existem campos vazios!');
     }
-  }*/
-onSubmit(value: string) {
+  }
+  onSubmit(value: string): void {
     this.submitted = true;
-    this.msgs.push({severity: 'info', summary: 'Success', detail: 'Form Submitted'});
+    this.msgs = [];
+    this.msgs.push({severity: 'info', summary: 'Success', detail: 'Curso ' + this.nome + ' com duração de' +
+    this.duracao + ' adicionado com sucesso!'});
 }
 
 }

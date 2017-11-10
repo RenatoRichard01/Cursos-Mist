@@ -7,6 +7,8 @@ import { FormCursoComponent } from './form-curso.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {SplitButtonModule} from 'primeng/primeng';
+import {TooltipModule} from 'primeng/primeng';
+
 
 @NgModule({
   imports: [
@@ -18,7 +20,8 @@ import {SplitButtonModule} from 'primeng/primeng';
     PanelModule,
     HttpClientModule,
     GrowlModule,
-    CodeHighlighterModule
+    CodeHighlighterModule,
+    TooltipModule
   ],
   declarations: [
     FormCursoComponent
