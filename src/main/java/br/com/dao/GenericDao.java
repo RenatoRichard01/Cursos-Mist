@@ -12,18 +12,24 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.sessaoHibernate.HibernateUtil;
 
+
 public abstract class GenericDao<T, I extends Serializable> {
+	
 	Session session = HibernateUtil.getSession();
-	@Transactional(propagation = Propagation.REQUIRED)
+	
+
 	public T adicionar(T entity) {
-		try {
-			session.save(entity);
-			return entity;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+		 	Transaction transaction = null;
+		  		try {
+		 		transaction = session.beginTransaction();
+		  		session.save(entity);
+		 		transaction.commit();
+		  			return entity;
+		  		} catch (Exception e) {
+		  			e.printStackTrace();
+		  		}
+		  		return null;
+		  	}
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void deletar(T entity) {
 		try {
@@ -44,12 +50,9 @@ public abstract class GenericDao<T, I extends Serializable> {
 	
 	@SuppressWarnings("unchecked")
 	public List<T> listar(Class<T> classe) {
-		Transaction transaction = null;
 		List<T> listar = null;
 		try {
-			transaction = session.beginTransaction();
 			Criteria selectAll = session.createCriteria(classe);
-			transaction.commit();
 			listar = selectAll.list();
 		} catch (RuntimeException e) {
 			throw e;
@@ -58,12 +61,9 @@ public abstract class GenericDao<T, I extends Serializable> {
 	}
 	@SuppressWarnings("unchecked")
 	public T listarPorId(Class<T> classe, Integer pk) throws Exception {
-		Transaction transaction = null;
 		try {
-			transaction = session.beginTransaction();
 			T entity = (T) session.load(classe, pk);
 			session.flush();
-			transaction.commit();
 			return entity;
 		} catch (RuntimeException e) {
 			throw e;
@@ -71,15 +71,12 @@ public abstract class GenericDao<T, I extends Serializable> {
 	}
 	@SuppressWarnings("unchecked")
 	public List<T> buscarPorNome(String classe, String nome) throws Exception {
-		Transaction transaction = null;
 		List<T> listagem = null;
 		try {
-			transaction = session.beginTransaction();
 			Query consulta = session.getNamedQuery(classe + ".buscarPorNome");
 			consulta.setString("nome", nome);
 			listagem = consulta.list();
 			session.flush();
-			transaction.commit();
 			return listagem;
 		} catch (RuntimeException e) {
 			throw e;
