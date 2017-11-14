@@ -7,50 +7,37 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.sessaoHibernate.HibernateUtil;
 
 public abstract class GenericDao<T, I extends Serializable> {
 	Session session = HibernateUtil.getSession();
-	
+	@Transactional(propagation = Propagation.REQUIRED)
 	public T adicionar(T entity) {
-		Transaction transaction = null;
 		try {
-			transaction = session.beginTransaction();
 			session.save(entity);
-			transaction.commit();
 			return entity;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void deletar(T entity) {
-		Transaction transaction = null;
-
 		try {
-			transaction = session.beginTransaction();
 			session.delete(entity);
-			transaction.commit();
 		} catch (Exception e) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			e.printStackTrace();
 		}
 	}
-	
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void alterar(T entity) {
-		Transaction transaction = null;
 		try {
-			transaction = session.beginTransaction();
 			session.update(entity);
-			transaction.commit();
 		} catch (RuntimeException e) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
+				e.printStackTrace();
 		}
 	}
 	
