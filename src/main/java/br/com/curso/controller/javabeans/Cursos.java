@@ -1,5 +1,7 @@
 package br.com.curso.controller.javabeans;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,23 +13,25 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Cursos")
-@NamedQueries({
-	@NamedQuery(name = "Cursos.buscarPorNome", query = "select curso from Cursos curso where nome = :nome")
-})
-public class Cursos {
+public class Cursos implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
+	private Long id;
+	
 	@Column(nullable = false)
 	private String nome;
+	
 	@Column(nullable = false)
 	private String duracao;
 	  
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

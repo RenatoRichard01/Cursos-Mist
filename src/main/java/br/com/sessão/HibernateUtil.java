@@ -1,4 +1,4 @@
-package br.com.sessaoHibernate;
+package br.com.sessão;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
