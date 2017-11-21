@@ -18,7 +18,7 @@ import br.com.dao.CursosDao;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/clavas")
+@RequestMapping
 public class CursoResource {
 	
     @Autowired
@@ -31,15 +31,15 @@ public class CursoResource {
     
     @PostMapping
     public List<Cursos> salvar(@RequestBody Cursos curso) {
-		cursosD.save(curso);
-		return cursosD.findAll();
+	    cursosD.save(curso);
+    	return cursosD.findAll();
 	}
 
 	@DeleteMapping("/{id}")
-	public List<Cursos> deletar(@PathVariable Integer id){
+	public List<Cursos> deletar(@PathVariable Long id){
      cursosD.delete(id);
      return cursosD.findAll();
-	} 
+	}
 	
 	
 	/*@RequestMapping(value = "/", method = RequestMethod.PUT)

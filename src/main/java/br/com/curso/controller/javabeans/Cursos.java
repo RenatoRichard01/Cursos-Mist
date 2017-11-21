@@ -21,10 +21,10 @@ public class Cursos implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	@Column(nullable = false)
+	@Column(nullable= false)
 	private String nome;
 	
-	@Column(nullable = false)
+	@Column(nullable= false)
 	private String duracao;
 	  
 	public Long getId() {
