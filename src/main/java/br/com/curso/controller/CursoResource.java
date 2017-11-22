@@ -50,26 +50,5 @@ public class CursoResource {
 		cursosD.save(curso);
 		return cursosD.findAll();
 	}
-	
-	
-	
-	/*@RequestMapping(value = "/", method = RequestMethod.PUT)
-	*@ResponseBody
-	*public ResponseEntity<List<Cursos>> alterar(@RequestBody Cursos curso) throws Exception {
-	*	Cursos cursoUp = cDao.listarPorId(Cursos.class, curso.getId());
-	*	cursoUp.setNome(curso.getNome());
-	*	cursoUp.setDuracao(curso.getDuracao());
-	*	cDao.alterar(cursoUp);
-	*	return new ResponseEntity<List<Cursos>>(cDao.listar(Cursos.class), HttpStatus.OK);
-	*}
-    */
-	/*@RequestMapping(value = "/{nome}", method = RequestMethod.GET)
-	*public ResponseEntity<List<Cursos>> buscarPorNome(@PathVariable("nome") String nome) throws Exception {
-	*	List<Cursos> listagem = cDao.findByName(nome);
-	*	if(listagem == null){
-	*		return new ResponseEntity<List<Cursos>>(HttpStatus.NOT_FOUND);
-	*	}
-	*	return new ResponseEntity<List<Cursos>>(new ArrayList<Cursos>(listagem), HttpStatus.OK);
-	*}
-	*/
+
 }
