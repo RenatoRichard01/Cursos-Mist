@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.curso.controller.javabeans.Cursos;
-import br.com.dao.CursosDao;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -23,32 +22,26 @@ import br.com.dao.CursosDao;
 public class CursoResource {
 	
     @Autowired
-    private CursosDao cursosD;
+    private ClavasService service;
     
     @GetMapping
     public List<Cursos> pesquisar(String nome){
-    	if (nome != null) {
-    		return cursosD.pesquisarCursos(nome);
-    	}
-    	return cursosD.findAll();
+       return service.pesquisar(nome);
     }
     
     @PostMapping
     public List<Cursos> salvar(@RequestBody Cursos curso) {
-	    cursosD.save(curso);
-    	return cursosD.findAll();
+    	return service.salvar(curso);
 	}
 
 	@DeleteMapping("/{id}")
 	public List<Cursos> deletar(@PathVariable Long id){
-     cursosD.delete(id);
-     return cursosD.findAll();
+     return service.deletar(id);
 	}
 	
 	@PutMapping
 	public List<Cursos> alterar(@RequestBody Cursos curso){
-		cursosD.save(curso);
-		return cursosD.findAll();
+	 return service.alterar(curso);
 	}
 
 }
